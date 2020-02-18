@@ -24,8 +24,8 @@ fn create_list(start: i32, count: i32, unit: i32) -> Option<Box<ListNode>> {
     for i in 1..count as usize {
         match prev_node {
             Some(node) => {
-                let idx = (i + 1) as i32;
-                node.next = Some(Box::new(ListNode::new(idx * unit)));
+                let idx = i as i32;
+                node.next = Some(Box::new(ListNode::new(start + idx * unit)));
                 prev_node = &mut node.next;
             },
             None => {},
@@ -50,7 +50,7 @@ fn read_list (list: Option<Box<ListNode>>) {
 }
 
 fn main() {
-    let list = create_list(1, 4, 1);
+    let list = create_list(1, 4, 2); // 1->3->5->7
     println!("println list format: ");
     println!("{:?}", list);
 
