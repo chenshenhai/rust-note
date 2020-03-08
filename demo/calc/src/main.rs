@@ -2,9 +2,17 @@ mod calc;
 use calc::calc_expression;
 
 fn main() {
-    let expr = "1+(2-3)*4+(5-5)".to_string();
+    // 3+(2-5)*6 => 325-6*+ => -15
+    // ["3", "2", "5", "-", "6", "*", "+"]
+    let expr = "3+(2-5)*6".to_string();
     let result = calc_expression(&expr);
-    let expect = "-3";
+    let expect = "-15";
+    assert_eq!(result, expect);
+
+    // 11+(22-33)*44+(55-66)+77/88 = -483.125
+    let expr = "11+(22-33)*44+(55-66)+77/88".to_string();
+    let result = calc_expression(&expr);
+    let expect = "-483.125";
     assert_eq!(result, expect);
     println!("success!");
 }
