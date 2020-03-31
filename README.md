@@ -7,5 +7,6 @@
 - [模块系统](./demo/mod_sys/src/main.rs)
 - [文件读写](./demo/fs/src/main.rs)
 - [单线程HTTP服务](./demo/http/src/main.rs)
+- [多线程HTTP服务](./demo/http/src/main.rs)
 - [Option/Some/None 使用](./demo/option_some_none/src/main.rs)
 - [链表实现](./demo/list_node/src/main.rs)
