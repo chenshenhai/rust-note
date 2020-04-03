@@ -5,7 +5,7 @@
 - [模块使用](./demo/mod_use/src/main.rs)
 - [模块嵌套](./demo/mod_nest/src/main.rs)
 - [模块系统](./demo/mod_sys/src/main.rs)
-- [集成测试](./demo/list_node/src/main.rs)
+- [集成测试](./demo/testing/)
 - [文件读写](./demo/fs/src/main.rs)
 - [单线程HTTP服务](./demo/http/src/main.rs)
 - [多线程HTTP服务](./demo/http/src/main.rs)
