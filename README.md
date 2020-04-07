@@ -11,3 +11,4 @@
 - [多线程HTTP服务](./demo/http/src/main.rs)
 - [Option/Some/None 使用](./demo/option_some_none/src/main.rs)
 - [链表实现](./demo/list_node/src/main.rs)
+- [WASM开发](./demo/mywasm/)
