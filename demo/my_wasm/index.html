@@ -1,0 +1,16 @@
+<html>
+  <head>
+    <title>mywasm</title>
+  </head>
+  <body>
+    <div>hello mywasm</div>
+    <script type="module">
+      import init, { greet } from "./pkg/mywasm.js";
+      async function main() {
+        await init();
+        greet();
+      }
+      main();
+    </script>
+  </body>
+</html>
