@@ -1,0 +1,21 @@
+{
+  "str": "hello world",
+  "number": 123456,
+  "array": [0, 1, 2, 3, 4, 5],
+  "null": null,
+  "boolean": true,
+  "obj": {
+    "name": "hello",
+    "list": ["abc", "123", 2, 3, 4, 5]
+  },
+  "objArray": [
+    {
+      "name": "hello 001",
+      "list": ["obj001", "123", 2, 3, 4, 5]
+    },
+    {
+      "name": "hello 002",
+      "list": ["obj002", "123", 2, 3, 4, 5]
+    }
+  ]
+}
