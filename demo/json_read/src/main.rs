@@ -2,11 +2,16 @@ use json;
 use std::fs::File;
 use std::io::Read;
 
-fn main() {
-    let mut f = File::open("./json/hello.json").expect("file not found");
+fn read_file(path: &str) -> String {
+    let mut f = File::open(path).expect("file not found");
     let mut content = String::new();
     f.read_to_string(&mut content)
         .expect("something went wrong reading the file");
+    return content;
+}
+
+fn main() {
+    let content = read_file("./json/hello.json");
 
     let obj = json::parse(&content).unwrap();
     println!("json.str:  {:?}", obj["str"]);
