@@ -7,6 +7,7 @@
 - [模块系统](./demo/mod_sys/src/main.rs)
 - [集成测试](./demo/testing/)
 - [文件读写](./demo/fs/src/main.rs)
+- [JSON文件读取](./demo/json_read/src/main.rs)
 - [单线程HTTP服务](./demo/http/src/main.rs)
 - [多线程HTTP服务](./demo/http/src/main.rs)
 - [Option/Some/None 使用](./demo/option_some_none/src/main.rs)
