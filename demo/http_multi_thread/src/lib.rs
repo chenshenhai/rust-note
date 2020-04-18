@@ -1,14 +1,14 @@
-use std::thread;
 use std::sync::mpsc;
 use std::sync::Arc;
 use std::sync::Mutex;
+use std::thread;
 
 enum Message {
     NewJob(Job),
     Terminate,
 }
 
-pub struct ThreadPool{
+pub struct ThreadPool {
     workers: Vec<Worker>,
     sender: mpsc::Sender<Message>,
 }
@@ -16,7 +16,7 @@ pub struct ThreadPool{
 type Job = Box<FnBox + Send + 'static>;
 
 impl ThreadPool {
-    pub fn new(size :usize) ->ThreadPool{
+    pub fn new(size: usize) -> ThreadPool {
         assert!(size > 0);
 
         let (sender, receiver) = mpsc::channel();
@@ -29,15 +29,12 @@ impl ThreadPool {
             workers.push(Worker::new(id, receiver.clone()));
         }
 
-        ThreadPool {
-            workers,
-            sender,
-        }
+        ThreadPool { workers, sender }
     }
 
-    pub fn execute<F> (&self, f: F)
-        where
-        F: FnOnce() + Send + 'static
+    pub fn execute<F>(&self, f: F)
+    where
+        F: FnOnce() + Send + 'static,
     {
         let job = Box::new(f);
         self.sender.send(Message::NewJob(job)).unwrap();
@@ -81,21 +78,19 @@ struct Worker {
 
 impl Worker {
     fn new(id: usize, receiver: Arc<Mutex<mpsc::Receiver<Message>>>) -> Worker {
-        let thread = thread::spawn(move || {
-            loop {
-                let message = receiver.lock().unwrap().recv().unwrap();
+        let thread = thread::spawn(move || loop {
+            let message = receiver.lock().unwrap().recv().unwrap();
 
-                match message {
-                    Message::NewJob(job) => {
-                        println!("Worker {} got a job; executing.", id);
+            match message {
+                Message::NewJob(job) => {
+                    println!("Worker {} got a job; executing.", id);
 
-                        job.call_box();
-                    },
-                    Message::Terminate => {
-                        println!("Worker {} was told to terminate.", id);
+                    job.call_box();
+                }
+                Message::Terminate => {
+                    println!("Worker {} was told to terminate.", id);
 
-                        break;
-                    },
+                    break;
                 }
             }
         });
