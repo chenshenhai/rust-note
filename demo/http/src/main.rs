@@ -13,10 +13,10 @@ fn main() {
 }
 
 fn handle_conn(mut stream: TcpStream) {
-    let text = String::from("hello world!");
-    let content = "<h1>".to_string() + &text +  &"</h1>1234567".to_string();
+    let text = String::from("hello world! 您好，世界！");
+    let content = "<html><head></head><h1>".to_string() + &text +  &"</h1>1234567</html>".to_string();
     let response = format!(
-        "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\nContent-Length: {}\r\n\r\n{}",
+        "HTTP/1.1 200 OK\r\nContent-Type: text/html;charset=utf-8\r\nContent-Length: {}\r\n\r\n{}",
         content.as_bytes().len(),
         content
     );
