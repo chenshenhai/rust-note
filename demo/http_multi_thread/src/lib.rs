@@ -13,7 +13,7 @@ pub struct ThreadPool {
     sender: mpsc::Sender<Message>,
 }
 
-type Job = Box<FnBox + Send + 'static>;
+type Job = Box<dyn FnBox + Send + 'static>;
 
 impl ThreadPool {
     pub fn new(size: usize) -> ThreadPool {
