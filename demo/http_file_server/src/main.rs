@@ -40,12 +40,21 @@ fn response(path: &str, mut stream: TcpStream) {
     println!("{}", file_path);
     let mut buf = Vec::new();
     let file = File::open(file_path);
-    file.unwrap().read_to_end(&mut buf);
+    // file.unwrap().read_to_end(&mut buf);
+
+    match file.unwrap().read_to_end(&mut buf) {
+        Ok(_) => println!("Read file ok"),
+        Err(e) => println!("Failed readinf file: {}", e),
+    }
 
     let mut encoded: Vec<u8> = vec![];
     {
         let mut encoder = Encoder::with_chunks_size(&mut encoded, 8);
-        encoder.write_all(&buf);
+        // encoder.write_all(&buf);
+        match encoder.write_all(&buf) {
+            Ok(_) => println!("write_all ok"),
+            Err(e) => println!("Failed write_all {}", e),
+        }
     }
 
     let headers =
