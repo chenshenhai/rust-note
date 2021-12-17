@@ -7,12 +7,12 @@ pub struct Singleton {
 pub fn create_singleton(name: &str) -> Arc<Singleton> {
     static mut SINGLESTON: Option<Arc<Singleton>> = None;
     unsafe {
-        Arc::clone(SINGLESTON.get_or_insert_with(|| {
+        return Arc::clone(SINGLESTON.get_or_insert_with(|| {
             println!("init singleton");
             Arc::new(Singleton {
                 name: name.to_string(),
             })
-        }))
+        }));
     }
 }
 
@@ -22,6 +22,6 @@ fn main() {
     println!("{}", a.name);
 
     let name2 = "bbb";
-    let b = create_singleton(name2);
+    let b = create_singleton(&name2);
     println!("{}", b.name);
 }
