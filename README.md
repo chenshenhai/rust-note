@@ -19,6 +19,7 @@
 **数据结构:** [链表实现](./demo/list_node/src/main.rs)
 
 
- **设计模式:** [单例模式](./demo/pattern_singleton/) | [工厂模式](./demo/pattern_factory/)
+ **设计模式:** [单例模式](./demo/pattern_singleton/src/main.rs) | [工厂模式](./demo/pattern_factory/src/main.rs) | [创造者模式](./demo/pattern_builder/src/main.rs)
+
 
 
