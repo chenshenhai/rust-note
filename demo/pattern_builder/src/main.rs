@@ -2,8 +2,8 @@ use std::fmt::Debug;
 
 #[derive(Debug)]
 pub struct Car {
-    name: String,
-    time: String,
+    _name: String,
+    _time: String,
 }
 
 pub struct CarBuilder {
@@ -24,8 +24,8 @@ impl CarBuilder {
 
     pub fn build(&self, name: String) -> Car {
         let car = Car {
-            time: self.time.to_string(),
-            name,
+            _time: self.time.to_string(),
+            _name: name,
         };
         car
     }
