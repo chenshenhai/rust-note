@@ -2,6 +2,7 @@ use std::net::{TcpListener, TcpStream};
 use std::io::{Read, Write};
 use std::thread;
 use std::fs::File;
+use std::collections::HashMap;
 
 fn main() {
     let listener = TcpListener::bind("127.0.0.1:3001").unwrap();
@@ -18,6 +19,7 @@ fn main() {
 
 fn get_path(mut stream: &TcpStream) -> String {
     let mut buf = [0u8; 4096];
+
     match stream.read(&mut buf) {
         Ok(_) => {
             let req_str = String::from_utf8_lossy(&buf);
@@ -33,6 +35,7 @@ fn get_path(mut stream: &TcpStream) -> String {
     }
 }
 
+
 fn response(path: &str, mut stream: TcpStream) {
     let file_path: &str = &("./files".to_string() + path);
     println!("{}", file_path);
@@ -43,21 +46,13 @@ fn response(path: &str, mut stream: TcpStream) {
         Ok(_) => println!("Read file ok"),
         Err(e) => println!("Failed readinf file: {}", e),
     }
-    
-    // println!("buf = {:?}", buf);
     let chunks = read_file_chunks(&buf, 8);
-    // println!("chunks = {:?}", chunks);
-    let mut headers = vec![
+    let mut headers: Vec<&str> = vec![
         "HTTP/1.1 200 OK",
     ];
-
-    if path.ends_with(".html") {
-        headers.push("Content-type: text/html")
-    } else if path.ends_with(".png") {
-        headers.push("Content-type: image/png")
-    } else {
-        headers.push("Content-type: text/plain")
-    }
+    let mut content_type = get_content_type(path).to_owned();
+    content_type = format!("Content-type: {}", content_type);
+    headers.push(&content_type);
     headers.push("Transfer-Encoding: chunked");
     headers.push("\r\n");
 
@@ -70,6 +65,20 @@ fn response(path: &str, mut stream: TcpStream) {
         Ok(_) => println!("Response sent"),
         Err(e) => println!("Failed sending response: {}", e),
     }
+}
+
+fn get_content_type(path: &str) -> String  {
+    let mut map = HashMap::new();
+    map.insert("html", "text/html");
+    map.insert("text", "text/plain");
+    map.insert("js", "text/javascript");
+    map.insert("png", "image/png");
+    map.insert("jpg", "image/jpeg");
+    map.insert("css", "text/css");
+    let names: Vec<&str> = path.split('.').collect();
+    let extname = names.last().unwrap();
+    let content_type = map.get(extname.to_owned());
+    return content_type.unwrap_or(&"text/html").to_string();
 }
 
 fn handle_client(stream: TcpStream) {
