@@ -10,7 +10,7 @@
 
 **文件:** [文件读写](./demo/fs/src/main.rs)
 
-**HTTP:** [单线程HTTP服务](./demo/http/src/main.rs) | [多线程HTTP服务](./demo/http_multi_thread/) | [解析HTTP的请求路径Path](./demo/http_parse_path/src/main.rs)
+**HTTP:** [单线程HTTP服务](./demo/http/src/main.rs) | [多线程HTTP服务](./demo/http_multi_thread/) | [解析HTTP的请求路径Path](./demo/http_parse_path/src/main.rs) | [HTTP静态文件服务](./demo/http_file_server/src/main.rs)
 
 **JSON操作:** [依赖json的使用](./demo/json_read/src/main.rs)
 
