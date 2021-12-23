@@ -1,6 +1,7 @@
 use std::net::{TcpStream};
 use std::io::{Read};
 use std::collections::HashMap;
+use std::path::Path;
  
 pub fn get_path(mut stream: &TcpStream) -> String {
     let mut buf = [0u8; 4096];
@@ -18,6 +19,10 @@ pub fn get_path(mut stream: &TcpStream) -> String {
             "/".to_string()
         }
     }
+}
+
+pub fn is_file_exist(file_path: &str) -> bool {
+    Path::new(file_path).exists()
 }
 
 pub fn get_content_type(path: &str) -> String  {
