@@ -1,0 +1,12 @@
+html, body {
+  margin: 0;
+}
+
+.text {
+  font-size: 20px;
+  color: rgb(10, 93, 141);
+}
+
+.image {
+  max-width: 100px;
+}
